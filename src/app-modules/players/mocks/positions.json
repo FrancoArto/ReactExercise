@@ -1,0 +1,50 @@
+[
+  {
+    "name": "All",
+    "value": "All"
+  },
+  {
+    "name": "Attacking Midfield",
+    "value": "Attacking Midfield"
+  },
+  {
+    "name": "Central Midfield",
+    "value": "Central Midfield"
+  },
+  {
+    "name": "Centre Back",
+    "value": "Centre-Back"
+  },
+  {
+    "name": "Centre Forward",
+    "value": "Centre-Forward"
+  },
+  {
+    "name": "Defensive Midfield",
+    "value": "Defensive Midfield"
+  },
+  {
+    "name": "Keeper",
+    "value": "Keeper"
+  },
+  {
+    "name": "Left Midfield",
+    "value": "Left Midfield"
+  },
+  {
+    "name": "Left Wing",
+    "value": "Left Wing"
+  },
+  {
+    "name": "Left Back",
+    "value": "Left-Back"
+  },
+  {
+    "name": "Right Back",
+    "value": "Right-Back"
+  },
+  {
+    "name": "Attacking Midfield",
+    "value": "Attacking Midfield"
+  }
+]
