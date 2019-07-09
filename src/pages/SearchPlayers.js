@@ -1,12 +1,12 @@
 import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
 import { SearchForm } from '../app-modules/players/components';
-import { retrievePlayers } from '../app-modules/players';
+import { getPlayers } from '../app-modules/players';
 
 const SearchPlayers = (props) => {
 
   useEffect(() => {
-    props.retrievePlayers();
+    props.getPlayers();
   });
 
   return (
@@ -26,7 +26,7 @@ const mapStateToProps = (state, props) => (
 
 
 const mapDispatchToProps = {
-  retrievePlayers: () => retrievePlayers()
+  getPlayers: () => getPlayers()
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(SearchPlayers);

@@ -1,4 +1,6 @@
+import axios from 'axios';
 import { RETRIEVE_PLAYERS, RETRIEVE_PLAYERS_SUCCESS, RETRIEVE_PLAYERS_FAILURE } from ".";
+import { PLAYERS_URL } from ".";
 
 const retrievePlayers = () => ({
   type: RETRIEVE_PLAYERS
@@ -14,8 +16,20 @@ const retrievePlayersFailure = (payload) => ({
   payload: payload
 })
 
+const getPlayers = () => {
+  return dispatch => {
+    dispatch(retrievePlayers())
+    axios.get(PLAYERS_URL)
+      .then((response) => {
+        dispatch(retrievePlayersSuccess(response.data))
+      })
+      .catch((response) => {
+        dispatch(retrievePlayersFailure(response.data))
+      })
+  }
+}
+
+
 export default {
-  retrievePlayers,
-  retrievePlayersSuccess,
-  retrievePlayersFailure
+  getPlayers
 }

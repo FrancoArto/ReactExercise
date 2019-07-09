@@ -1,3 +1,5 @@
-const PLAYERS_URL = 'https://football-players-b31f2.firebaseio.com/players.json?print=pretty';
+const PLAYERS_URL = 'https://football-players-b31f2.firebaseio.com/players.json';
 
-export default PLAYERS_URL;
+export default { 
+  PLAYERS_URL
+};
