@@ -1,14 +1,13 @@
-import React, { useState } from 'react';
+import React from 'react';
 
 const Input = ( props ) => {
-  const [value, setValue] = useState('');
 
   const onValueChange = (event) => {
-    setValue(event.target.value);
+    props.onValueChange(event.target.value);
   } 
 
   return (
-    <input {...props} onChange={onValueChange} value={value} />
+    <input {...props} onChange={onValueChange} value={props.value} />
   );
 }
 

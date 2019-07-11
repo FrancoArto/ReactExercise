@@ -1,10 +1,9 @@
-import React, { useState } from 'react';
+import React from 'react';
 
 const Select = ( props ) => {
-  const [selectedValue, setSelectedValue] = useState(props.options[0]);
 
   const onValueChange = (event) => {
-    setSelectedValue(event.target.value);
+    props.onValueChange(event.target.value);
   }
 
   const renderOptions = (options) => {
@@ -13,7 +12,7 @@ const Select = ( props ) => {
   }
 
   return (
-    <select onChange={onValueChange} value={selectedValue}>
+    <select onChange={onValueChange} value={props.selectedValue}>
       {renderOptions(props.options)}
     </select>
   );

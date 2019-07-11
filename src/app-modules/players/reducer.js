@@ -1,10 +1,13 @@
-import { RETRIEVE_PLAYERS, RETRIEVE_PLAYERS_SUCCESS, RETRIEVE_PLAYERS_FAILURE } from ".";
+import { RETRIEVE_PLAYERS, RETRIEVE_PLAYERS_SUCCESS, RETRIEVE_PLAYERS_FAILURE, SET_SEARCHTERMS } from ".";
+import moment from "moment";
 
 const initialState = {
   error: {},
   loading: false,
   players: [],
-  results: []
+  playerAge: 0,
+  playerName: '',
+  playerPosition: ''
 };
 
 const playersReducer = (state = initialState, action) => {
@@ -20,7 +23,7 @@ const playersReducer = (state = initialState, action) => {
       return {
         ...state,
         loading: false,
-        players: action.payload
+        players: action.payload.map(player => ({...player, age: moment().diff(player.dateOfBirth, 'years')}))
       };
     }
 
@@ -31,6 +34,15 @@ const playersReducer = (state = initialState, action) => {
         loading: false,
         players: []
       };
+    }
+
+    case SET_SEARCHTERMS: {
+      return {
+        ...state,
+        playerAge: action.payload.playerAge,
+        playerName: action.payload.playerName,
+        playerPosition: action.payload.playerPosition
+      }
     }
 
     default: {
