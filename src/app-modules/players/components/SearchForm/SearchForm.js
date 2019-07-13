@@ -3,13 +3,26 @@ import { Input, Select, Button } from '../../../core/components';
 import positions from '../../mocks/positions.json';
 
 const SearchForm = ( props ) => {
+
+  const onPlayerAgeChange = (age) => {
+    props.onPlayerAgeChange(age);
+  }
+
+  const onPlayerNameChange = (name) => {
+    props.onPlayerNameChange(name);
+  }
+
+  const onPlayerPositionChange = (position) => {
+    props.onPlayerPositionChange(position);
+  }
+  
   return (
-    <div>
-      <Input type="text" />
-      <Select options={positions} />
-      <Input type="number" max={40} min={18} /> 
-      <Button onClick={props.onSubmit} text="Search" />
-    </div>
+    <form onSubmit={props.onSubmit}>
+      <Input type="text" onValueChange={onPlayerNameChange} value={props.playerName} />
+      <Select options={positions} onValueChange={onPlayerPositionChange} value={props.playerPosition} />
+      <Input type="number" max={40} min={18} onValueChange={onPlayerAgeChange} value={props.playerAge} /> 
+      <Button type="submit" text="Search" />
+    </form>
   );
 }
 

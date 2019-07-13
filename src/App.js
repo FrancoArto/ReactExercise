@@ -1,10 +1,14 @@
 import React from 'react';
+import { Provider } from 'react-redux';
 import './App.css';
 import { SearchPlayers } from './pages';
+import { store } from './store';
 
 function App() {
   return (
-    <SearchPlayers />
+    <Provider store={store}>
+      <SearchPlayers />
+    </Provider>
   );
 }
 
