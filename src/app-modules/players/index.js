@@ -11,4 +11,5 @@ export const {
 } = actionTypes;
 export const { PLAYERS_URL } = constants;
 
+export { default as filterPlayersSelector } from './selectors';
 export { default as playersReducer } from './reducer';

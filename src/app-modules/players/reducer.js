@@ -5,9 +5,11 @@ const initialState = {
   error: {},
   loading: false,
   players: [],
-  playerAge: 0,
-  playerName: '',
-  playerPosition: ''
+  searchTerms: {
+    playerAge: 0,
+    playerName: '',
+    playerPosition: ''
+  }
 };
 
 const playersReducer = (state = initialState, action) => {
@@ -39,9 +41,7 @@ const playersReducer = (state = initialState, action) => {
     case SET_SEARCHTERMS: {
       return {
         ...state,
-        playerAge: action.payload.playerAge,
-        playerName: action.payload.playerName,
-        playerPosition: action.payload.playerPosition
+        searchTerms: action.payload
       }
     }
 

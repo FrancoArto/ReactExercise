@@ -1,12 +1,12 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { SearchForm } from '../app-modules/players/components';
-import { getPlayers, setSearchTerms } from '../app-modules/players';
+import { getPlayers, setSearchTerms, filterPlayersSelector } from '../app-modules/players';
 
 class SearchPlayers extends React.Component {
 
   state = {
-    playerAge: 0,
+    playerAge: '',
     playerName: '',
     playerPosition: ''
   }
@@ -18,7 +18,7 @@ class SearchPlayers extends React.Component {
   onFormSubmit = (event) => {
     event.preventDefault();
     this.props.setSearchTerms({
-      playerAge: this.state.playerAge,
+      playerAge: +this.state.playerAge,
       playerName: this.state.playerName,
       playerPosition: this.state.playerPosition
     })
@@ -48,7 +48,10 @@ class SearchPlayers extends React.Component {
         onPlayerAgeChange={this.onPlayerAgeChange}
         onPlayerNameChange={this.onPlayerNameChange}
         onPlayerPositionChange={this.onPlayerPositionChange}
-        onSubmit={this.onFormSubmit} />
+        onSubmit={this.onFormSubmit}
+        playerAge={this.state.playerAge}
+        playerName={this.state.playerName}
+        playerPosition={this.state.playerPosition} />
     );
   }
 }
@@ -57,7 +60,7 @@ const mapStateToProps = (state, props) => (
   {
     error: state.error,
     loading: state.loading,
-    results: state.results
+    results: filterPlayersSelector(state)
   }
 );
 
