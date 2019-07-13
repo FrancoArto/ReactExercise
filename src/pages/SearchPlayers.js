@@ -1,41 +1,56 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import { connect } from 'react-redux';
 import { SearchForm } from '../app-modules/players/components';
 import { getPlayers, setSearchTerms } from '../app-modules/players';
 
-const SearchPlayers = (props) => {
+class SearchPlayers extends React.Component {
 
-  const [playerAge, setPlayerAge] = useState(0);
-  const [playerName, setPlayerName] = useState('');
-  const [playerPosition, setPlayerPosition] = useState('');
-
-  useEffect(() => {
-    props.getPlayers();
-  });
-
-  const onPlayerAgeChange = (age) => {
-    setPlayerAge(age);
+  state = {
+    playerAge: 0,
+    playerName: '',
+    playerPosition: ''
   }
 
-  const onPlayerNameChange = (name) => {
-    setPlayerName(name);
+  componentDidMount() {
+    this.props.getPlayers();
   }
 
-  const onPlayerPositionChange = (position) => {
-    setPlayerPosition(position);
+  onFormSubmit = (event) => {
+    event.preventDefault();
+    this.props.setSearchTerms({
+      playerAge: this.state.playerAge,
+      playerName: this.state.playerName,
+      playerPosition: this.state.playerPosition
+    })
   }
 
-  return (
-    <SearchForm
-      onPlayerAgeChange={onPlayerAgeChange}
-      onPlayerNameChange={onPlayerNameChange}
-      onPlayerPositionChange={onPlayerPositionChange}
-      onSubmit={props.setSearchTerms({
-        playerAge: playerAge,
-        playerName: playerName,
-        playerPosition: playerPosition
-      })} />
-  );
+  onPlayerAgeChange = (age) => {
+    this.setState({
+      playerAge: age
+    })
+  }
+
+  onPlayerNameChange = (name) => {
+    this.setState({
+      playerName: name
+    })
+  }
+
+  onPlayerPositionChange = (position) => {
+    this.setState({
+      playerPosition: position
+    })
+  }
+
+  render() {
+    return (
+      <SearchForm
+        onPlayerAgeChange={this.onPlayerAgeChange}
+        onPlayerNameChange={this.onPlayerNameChange}
+        onPlayerPositionChange={this.onPlayerPositionChange}
+        onSubmit={this.onFormSubmit} />
+    );
+  }
 }
 
 const mapStateToProps = (state, props) => (

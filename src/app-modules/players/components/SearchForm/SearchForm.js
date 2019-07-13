@@ -17,12 +17,12 @@ const SearchForm = ( props ) => {
   }
   
   return (
-    <div>
+    <form onSubmit={props.onSubmit}>
       <Input type="text" onValueChange={onPlayerNameChange} />
       <Select options={positions} onValueChange={onPlayerPositionChange} />
       <Input type="number" max={40} min={18} onValueChange={onPlayerAgeChange} /> 
-      <Button onClick={props.onSubmit} text="Search" />
-    </div>
+      <Button type="submit" text="Search" />
+    </form>
   );
 }
 
