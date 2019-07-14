@@ -1,7 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { SearchForm } from '../app-modules/players/components';
-import { getPlayers, setSearchTerms, filterPlayersSelector } from '../app-modules/players';
+import { getPlayers, setSearchTerms, filterPlayersSelector, SearchForm, PlayersTable } from '../app-modules/players';
 
 class SearchPlayers extends React.Component {
 
@@ -44,14 +43,18 @@ class SearchPlayers extends React.Component {
 
   render() {
     return (
-      <SearchForm
-        onPlayerAgeChange={this.onPlayerAgeChange}
-        onPlayerNameChange={this.onPlayerNameChange}
-        onPlayerPositionChange={this.onPlayerPositionChange}
-        onSubmit={this.onFormSubmit}
-        playerAge={this.state.playerAge}
-        playerName={this.state.playerName}
-        playerPosition={this.state.playerPosition} />
+      <div>
+        <SearchForm
+          onPlayerAgeChange={this.onPlayerAgeChange}
+          onPlayerNameChange={this.onPlayerNameChange}
+          onPlayerPositionChange={this.onPlayerPositionChange}
+          onSubmit={this.onFormSubmit}
+          playerAge={this.state.playerAge}
+          playerName={this.state.playerName}
+          playerPosition={this.state.playerPosition} />
+          
+          <PlayersTable players={this.props.results} />
+      </div>
     );
   }
 }

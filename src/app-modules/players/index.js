@@ -1,6 +1,7 @@
 import actionCreators from './actions';
 import actionTypes from './actionTypes';
 import constants from './constants';
+import { Player, PlayersTable, SearchForm } from './components'
 
 export const { getPlayers, setSearchTerms } = actionCreators;
 export const { 
@@ -13,3 +14,4 @@ export const { PLAYERS_URL } = constants;
 
 export { default as filterPlayersSelector } from './selectors';
 export { default as playersReducer } from './reducer';
+export { Player, PlayersTable, SearchForm };
