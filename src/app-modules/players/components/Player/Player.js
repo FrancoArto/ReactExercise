@@ -1,23 +1,24 @@
 import React from 'react';
+import { TableRow, TableCell } from '@material-ui/core';
 
 const Player = (props) => (
-  <tr>
-    <td>
+  <TableRow>
+    <TableCell>
       {props.player.name}
-    </td>
-    <td>
+    </TableCell>
+    <TableCell>
       {props.player.position}
-    </td>
-    <td>
+    </TableCell>
+    <TableCell>
       {props.player.jerseyNumber}
-    </td>
-    <td>
+    </TableCell>
+    <TableCell>
       {props.player.nationality}
-    </td>
-    <td>
+    </TableCell>
+    <TableCell>
       {props.player.age}
-    </td>
-  </tr>
+    </TableCell>
+  </TableRow>
 )
 
 export default Player;
