@@ -1,6 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { getPlayers, setSearchTerms, filterPlayersSelector, SearchForm, PlayersTable } from '../app-modules/players';
+import { getPlayers, setSearchTerms, filterPlayersSelector } from '../app-modules/players';
+import { SearchForm, PlayersTable } from '../app-modules/players/components';
 
 class SearchPlayers extends React.Component {
 
