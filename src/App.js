@@ -1,10 +1,9 @@
 import React from 'react';
 import { Provider } from 'react-redux';
-import './App.css';
 import { SearchPlayers } from './pages';
 import { store } from './store';
 
-function App() {
+const App = () => {
   return (
     <Provider store={store}>
       <SearchPlayers />
