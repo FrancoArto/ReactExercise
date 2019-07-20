@@ -1,7 +1,9 @@
 import React from 'react';
+import { compose } from 'redux';
 import { connect } from 'react-redux';
 import { getPlayers, setSearchTerms, filterPlayersSelector, SearchForm, PlayersTable } from '../app-modules/players';
 import { Grid } from '@material-ui/core';
+import { withStyles } from '@material-ui/styles';
 
 class SearchPlayers extends React.Component {
 
@@ -43,9 +45,11 @@ class SearchPlayers extends React.Component {
   }
 
   render() {
+    const { classes } = this.props;
+
     return (
-      <Grid container direction="column">
-        <Grid item>
+      <Grid className={classes.root} container direction="column">
+        <Grid className="form row" item>
           <SearchForm
             onPlayerAgeChange={this.onPlayerAgeChange}
             onPlayerNameChange={this.onPlayerNameChange}
@@ -55,7 +59,7 @@ class SearchPlayers extends React.Component {
             playerName={this.state.playerName}
             playerPosition={this.state.playerPosition} />
         </Grid>
-        <Grid item>
+        <Grid className="row table-container" item>
           <PlayersTable players={this.props.results} />
         </Grid>
       </Grid>
@@ -78,4 +82,26 @@ const mapDispatchToProps = {
   setSearchTerms: (terms) => setSearchTerms(terms)
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(SearchPlayers);
+const styles = {
+  root: {
+    margin: 32,
+    width: 'auto',
+
+    '& .row': {
+      background: '#FFFFFF',
+      borderRadius: 5,
+      padding: 12,
+
+      '&.table-container': {
+        marginTop: 32,
+        padding: 0
+      }
+    },
+
+    '@media screen and (max-width: 599px)': {
+      margin: 0
+    }
+  }
+};
+
+export default compose(withStyles(styles, { name: 'SearchPlayers'}), connect(mapStateToProps, mapDispatchToProps))(SearchPlayers);

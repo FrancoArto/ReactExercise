@@ -1,24 +1,39 @@
 import React from 'react';
 import { TableRow, TableCell } from '@material-ui/core';
+import { withStyles } from '@material-ui/styles';
 
 const Player = (props) => (
-  <TableRow>
-    <TableCell>
+  <StyledTableRow>
+    <StyledTableCell>
       {props.player.name}
-    </TableCell>
-    <TableCell>
+    </StyledTableCell>
+    <StyledTableCell>
       {props.player.position}
-    </TableCell>
-    <TableCell>
+    </StyledTableCell>
+    <StyledTableCell>
       {props.player.jerseyNumber}
-    </TableCell>
-    <TableCell>
+    </StyledTableCell>
+    <StyledTableCell>
       {props.player.nationality}
-    </TableCell>
-    <TableCell>
+    </StyledTableCell>
+    <StyledTableCell>
       {props.player.age}
-    </TableCell>
-  </TableRow>
+    </StyledTableCell>
+  </StyledTableRow>
 )
+
+const StyledTableCell = withStyles(theme => ({
+  root: {
+    textAlign: 'center'
+  }
+}))(TableCell);
+
+const StyledTableRow = withStyles(theme => ({
+  root: {
+    '&:nth-of-type(even)': {
+      backgroundColor: '#D0CDCC'
+    }
+  }
+}))(TableRow);
 
 export default Player;

@@ -13,9 +13,9 @@ const CustomSelect = (props) => {
   }
 
   return (
-    <FormControl fullWidth={props.fullWidth}>
+    <FormControl variant="outlined" fullWidth={props.fullWidth}>
       <InputLabel htmlFor={props.id}>{props.label}</InputLabel>
-      <Select fullWidth={props.fullWidth} input={<OutlinedInput id={props.id} />} onChange={onValueChange} value={props.selectedValue}>
+      <Select fullWidth={props.fullWidth} input={<OutlinedInput id={props.id} labelWidth={props.labelWidth} value={props.selectedValue} />} onChange={onValueChange} value={props.selectedValue}>
         {renderOptions(props.options)}
       </Select>
     </FormControl>
