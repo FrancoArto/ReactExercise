@@ -34,5 +34,23 @@
     "nationality": "Cote d'Ivoire",
     "position": "Centre-Back",
     "age": 25
+  },
+  {
+    "contractUntil" : "2021-06-30",
+    "dateOfBirth" : "1993-03-15",
+    "jerseyNumber" : 6,
+    "name" : "Paul Pogba",
+    "nationality" : "France",
+    "position" : "Central Midfield",
+    "age": 26
+  },
+  {
+    "contractUntil" : "2018-06-30",
+    "dateOfBirth" : "1981-10-03",
+    "jerseyNumber" : 10,
+    "name" : "Zlatan Ibrahimovic",
+    "nationality" : "Sweden",
+    "position" : "Centre-Forward",
+    "age": 37
   }
 ]

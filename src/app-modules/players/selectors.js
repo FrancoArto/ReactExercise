@@ -34,4 +34,4 @@ const filterPlayersSelector = createSelector([playersSelector, filterByAgeSelect
   return result;
 });
 
-export default filterPlayersSelector;
+export default { playersSelector, searchTermsSelector, filterByAgeSelector, filterByNameSelector, filterByPositionSelector, filterPlayersSelector };
