@@ -36,7 +36,7 @@ const SearchForm = (props) => {
             variant="outlined" />
         </Grid>
         <Grid item xs={12} sm={3}>
-          <Input fullWidth type="number" max={40} min={18} label="Age" onChange={onPlayerAgeChange} value={props.playerAge} variant="outlined" />
+          <Input fullWidth type="number" InputProps={{inputProps: { max: 40, min: 18}}}  label="Age" onChange={onPlayerAgeChange} value={props.playerAge} variant="outlined" />
         </Grid>
         <Grid item xs={12} sm={2}>
           <CustomButton fullWidth color="primary" type="submit" text="Search" variant="contained" />

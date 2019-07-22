@@ -7,7 +7,7 @@ import { Grid } from '@material-ui/core';
 import { withStyles } from '@material-ui/styles';
 import positions from '../app-modules/players/mocks/positions.json';
 
-class SearchPlayers extends React.Component {
+export class SearchPlayers extends React.Component {
 
   state = {
     playerAge: '',

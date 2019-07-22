@@ -14,7 +14,7 @@ const filterByAgeSelector = createSelector([playersSelector, searchTermsSelector
 const filterByNameSelector = createSelector([playersSelector, searchTermsSelector], (players, searchTerms) => {
   let result = players;
   if (searchTerms.playerName !== '') {
-    result = players.filter(player => player.name.includes(searchTerms.playerName));
+    result = players.filter(player => player.name.toLowerCase().includes(searchTerms.playerName.toLowerCase()));
   }
   return result;
 });
