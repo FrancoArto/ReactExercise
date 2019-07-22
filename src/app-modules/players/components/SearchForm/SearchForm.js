@@ -9,7 +9,10 @@ const SearchForm = (props) => {
   }
 
   const onPlayerNameChange = (name) => {
-    props.onPlayerNameChange(name);
+    const regex = new RegExp(/^[a-zA-Z]+(\s{0,1}[a-zA-Z- ])*$/);
+    if(regex.test(name) || name === '') {
+      props.onPlayerNameChange(name);
+    }
   }
 
   const onPlayerPositionChange = (position) => {

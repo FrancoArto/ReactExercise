@@ -25,12 +25,25 @@ describe('search form', () => {
   });
 
 
-  it('renders without crashing', () => {
-    const rendered = shallow(<SearchPlayers classes={classesMock} error={{}} getPlayers={getPlayers} loading={false} results={players} setSearchTerms={setSearchTerms} />);
+  it('renders results without crashing', () => {
+    const rendered = shallow(<SearchPlayers classes={classesMock} error={null} getPlayers={getPlayers} loading={false} results={players} setSearchTerms={setSearchTerms} />);
   });
 
+  it('renders error without crashing', () => {
+    const rendered = shallow(<SearchPlayers classes={classesMock} error="Some error message" getPlayers={getPlayers} loading={false} results={players} setSearchTerms={setSearchTerms} />);
+  });
+
+  it('renders loading spinner without crashing', () => {
+    const rendered = shallow(<SearchPlayers classes={classesMock} error={null} getPlayers={getPlayers} loading={true} results={players} setSearchTerms={setSearchTerms} />);
+  });
+
+  it('renders no results message', () => {
+    const rendered = shallow(<SearchPlayers classes={classesMock} error={null} getPlayers={getPlayers} loading={true} results={[]} setSearchTerms={setSearchTerms} />);
+  });
+
+
   it('calls getPlayers action', () => {
-    const rendered = mount(<SearchPlayers classes={classesMock} error={{}} getPlayers={getPlayers} loading={false} results={players} setSearchTerms={setSearchTerms} />);
+    const rendered = mount(<SearchPlayers classes={classesMock} error={null} getPlayers={getPlayers} loading={false} results={players} setSearchTerms={setSearchTerms} />);
 
     expect(getPlayers).toHaveBeenCalledTimes(1);
   });
@@ -38,7 +51,7 @@ describe('search form', () => {
   it('sets player age to state', () => {
     const wrapper = mount(
       <SearchPlayers classes={classesMock}
-        error={{}} getPlayers={getPlayers} loading={false} results={players} setSearchTerms={setSearchTerms}
+        error={null} getPlayers={getPlayers} loading={false} results={players} setSearchTerms={setSearchTerms}
       />
     );
 
@@ -51,7 +64,7 @@ describe('search form', () => {
   it('sets player name to state', () => {
     const wrapper = mount(
       <SearchPlayers classes={classesMock}
-        error={{}} getPlayers={getPlayers} loading={false} results={players} setSearchTerms={setSearchTerms}
+        error={null} getPlayers={getPlayers} loading={false} results={players} setSearchTerms={setSearchTerms}
       />
     );
 
@@ -64,7 +77,7 @@ describe('search form', () => {
   it('sets player position to state', () => {
     const wrapper = mount(
       <SearchPlayers classes={classesMock}
-        error={{}} getPlayers={getPlayers} loading={false} results={players} setSearchTerms={setSearchTerms}
+        error={null} getPlayers={getPlayers} loading={false} results={players} setSearchTerms={setSearchTerms}
       />
     );
 
@@ -77,7 +90,7 @@ describe('search form', () => {
   it('sets searchterms to state', () => {
     const wrapper = mount(
       <SearchPlayers classes={classesMock}
-        error={{}} getPlayers={getPlayers} loading={false} results={players} setSearchTerms={setSearchTerms}
+        error={null} getPlayers={getPlayers} loading={false} results={players} setSearchTerms={setSearchTerms}
       />
     );
 

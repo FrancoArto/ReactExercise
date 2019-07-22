@@ -3,9 +3,10 @@ import { compose } from 'redux';
 import { connect } from 'react-redux';
 import { getPlayers, setSearchTerms, filterPlayersSelector } from '../app-modules/players';
 import { SearchForm, PlayersTable } from '../app-modules/players/components';
-import { Grid } from '@material-ui/core';
-import { withStyles } from '@material-ui/styles';
+import { Grid, Snackbar, Typography, Card, Box, CircularProgress } from '@material-ui/core';
+import { withStyles, ThemeProvider } from '@material-ui/styles';
 import positions from '../app-modules/players/mocks/positions.json';
+import { ErrorBar } from '../app-modules/core/components';
 
 export class SearchPlayers extends React.Component {
 
@@ -23,7 +24,7 @@ export class SearchPlayers extends React.Component {
     event.preventDefault();
     this.props.setSearchTerms({
       playerAge: +this.state.playerAge,
-      playerName: this.state.playerName,
+      playerName: this.state.playerName.trimRight(),
       playerPosition: this.state.playerPosition
     })
   }
@@ -51,20 +52,59 @@ export class SearchPlayers extends React.Component {
 
     return (
       <Grid className={classes.root} container direction="column">
-        <Grid className="form row" item>
-          <SearchForm
-            onPlayerAgeChange={this.onPlayerAgeChange}
-            onPlayerNameChange={this.onPlayerNameChange}
-            onPlayerPositionChange={this.onPlayerPositionChange}
-            onSubmit={this.onFormSubmit}
-            playerAge={this.state.playerAge}
-            playerName={this.state.playerName}
-            playerPosition={this.state.playerPosition}
-            positions={positions} />
-        </Grid>
-        <Grid className="row table-container" item>
-          <PlayersTable players={this.props.results} />
-        </Grid>
+        {!this.props.error && !this.props.loading &&
+          <Box>
+            <Grid className="form row" item>
+              <SearchForm
+                onPlayerAgeChange={this.onPlayerAgeChange}
+                onPlayerNameChange={this.onPlayerNameChange}
+                onPlayerPositionChange={this.onPlayerPositionChange}
+                onSubmit={this.onFormSubmit}
+                playerAge={this.state.playerAge}
+                playerName={this.state.playerName}
+                playerPosition={this.state.playerPosition}
+                positions={positions} />
+            </Grid>
+            {this.props.results.length > 0 &&
+              <Grid className="row table-container" item>
+
+                <PlayersTable players={this.props.results} />
+
+              </Grid>
+            }
+            {this.props.results.length === 0 &&
+              <ErrorBar
+                anchorOrigin={{
+                  vertical: 'bottom',
+                  horizontal: 'center',
+                }}
+                ContentProps={{
+                  'aria-describedby': 'error-message',
+                }}
+                message={<span id="error-message">No results to show</span>}
+                open={true}
+              />
+            }
+          </Box>
+        }
+        {this.props.error && !this.props.loading &&
+          <ErrorBar
+            anchorOrigin={{
+              vertical: 'top',
+              horizontal: 'center',
+            }}
+            ContentProps={{
+              'aria-describedby': 'error-message',
+            }}
+            message={<span id="error-message">An error ocurred: {this.props.error.toString()}. Please reload the page</span>}
+            open={true}
+          />
+        }
+        {this.props.loading &&
+          <Box className="row loading">
+            <CircularProgress size={120} />
+          </Box>
+        }
       </Grid>
     );
   }
@@ -72,8 +112,8 @@ export class SearchPlayers extends React.Component {
 
 const mapStateToProps = (state, props) => (
   {
-    error: state.error,
-    loading: state.loading,
+    error: state.playersReducer.error,
+    loading: state.playersReducer.loading,
     results: filterPlayersSelector(state)
   }
 );
@@ -95,6 +135,12 @@ const styles = {
       borderRadius: 5,
       padding: 12,
 
+      '&.loading': {
+        alignSelf: 'center',
+        justifySelf: 'center',
+        width: 'auto'
+      },
+
       '&.table-container': {
         marginTop: 32,
         padding: 0
@@ -107,4 +153,4 @@ const styles = {
   }
 };
 
-export default compose(withStyles(styles, { name: 'SearchPlayers'}), connect(mapStateToProps, mapDispatchToProps))(SearchPlayers);
+export default compose(withStyles(styles, { name: 'SearchPlayers' }), connect(mapStateToProps, mapDispatchToProps))(SearchPlayers);

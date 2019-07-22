@@ -2,7 +2,7 @@ import { RETRIEVE_PLAYERS, RETRIEVE_PLAYERS_SUCCESS, RETRIEVE_PLAYERS_FAILURE, S
 import moment from "moment";
 
 const initialState = {
-  error: {},
+  error: null,
   loading: false,
   players: [],
   searchTerms: {
@@ -32,7 +32,7 @@ const playersReducer = (state = initialState, action) => {
     case RETRIEVE_PLAYERS_FAILURE: {
       return {
         ...state,
-        error: action.payload,
+        error: action.payload || 'Unknown error',
         loading: false,
         players: []
       };
