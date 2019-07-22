@@ -1,9 +1,9 @@
 import actionCreators from './actions';
 import actionTypes from './actionTypes';
 import constants from './constants';
-import { Player, PlayersTable, SearchForm } from './components'
+import selectors from './selectors';
 
-export const { getPlayers, setSearchTerms } = actionCreators;
+export const { getPlayers, retrievePlayers, retrievePlayersFailure, retrievePlayersSuccess, setSearchTerms } = actionCreators;
 export const { 
   RETRIEVE_PLAYERS,
   RETRIEVE_PLAYERS_SUCCESS,
@@ -12,6 +12,5 @@ export const {
 } = actionTypes;
 export const { PLAYERS_URL } = constants;
 
-export { default as filterPlayersSelector } from './selectors';
+export const { playersSelector, searchTermsSelector, filterByAgeSelector, filterByNameSelector, filterByPositionSelector, filterPlayersSelector } = selectors;
 export { default as playersReducer } from './reducer';
-export { Player, PlayersTable, SearchForm };

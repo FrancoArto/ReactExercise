@@ -37,5 +37,8 @@ const getPlayers = () => {
 
 export default {
   getPlayers,
+  retrievePlayers,
+  retrievePlayersSuccess,
+  retrievePlayersFailure,
   setSearchTerms
 }

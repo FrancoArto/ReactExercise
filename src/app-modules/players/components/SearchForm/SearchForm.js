@@ -1,6 +1,5 @@
 import React from 'react';
 import { Input, CustomButton, CustomSelect } from '../../../core/components';
-import positions from '../../mocks/positions.json';
 import { Grid, makeStyles } from '@material-ui/core';
 
 const SearchForm = (props) => {
@@ -31,13 +30,13 @@ const SearchForm = (props) => {
             id="positions-select"
             label="Position"
             labelWidth={60}
-            options={positions}
+            options={props.positions}
             onValueChange={onPlayerPositionChange}
             selectedValue={props.playerPosition}
             variant="outlined" />
         </Grid>
         <Grid item xs={12} sm={3}>
-          <Input fullWidth type="number" max={40} min={18} label="Age" onChange={onPlayerAgeChange} value={props.playerAge} variant="outlined" />
+          <Input fullWidth type="number" InputProps={{inputProps: { max: 40, min: 18}}}  label="Age" onChange={onPlayerAgeChange} value={props.playerAge} variant="outlined" />
         </Grid>
         <Grid item xs={12} sm={2}>
           <CustomButton fullWidth color="primary" type="submit" text="Search" variant="contained" />

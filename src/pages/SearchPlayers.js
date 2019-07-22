@@ -1,11 +1,13 @@
 import React from 'react';
 import { compose } from 'redux';
 import { connect } from 'react-redux';
-import { getPlayers, setSearchTerms, filterPlayersSelector, SearchForm, PlayersTable } from '../app-modules/players';
+import { getPlayers, setSearchTerms, filterPlayersSelector } from '../app-modules/players';
+import { SearchForm, PlayersTable } from '../app-modules/players/components';
 import { Grid } from '@material-ui/core';
 import { withStyles } from '@material-ui/styles';
+import positions from '../app-modules/players/mocks/positions.json';
 
-class SearchPlayers extends React.Component {
+export class SearchPlayers extends React.Component {
 
   state = {
     playerAge: '',
@@ -57,7 +59,8 @@ class SearchPlayers extends React.Component {
             onSubmit={this.onFormSubmit}
             playerAge={this.state.playerAge}
             playerName={this.state.playerName}
-            playerPosition={this.state.playerPosition} />
+            playerPosition={this.state.playerPosition}
+            positions={positions} />
         </Grid>
         <Grid className="row table-container" item>
           <PlayersTable players={this.props.results} />
