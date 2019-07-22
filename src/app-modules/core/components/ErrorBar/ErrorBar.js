@@ -6,14 +6,16 @@ const ErrorBar = (props) => {
 
   return (
     <Snackbar {...props}>
-      <SnackbarContent {...props} className={classes.root} />
+      <SnackbarContent aria-describedby='error-message'
+        message={<span className="message" id="error-message">{props.message}</span>} className={classes.root} />
     </Snackbar>
   )
 }
 
 const styles = makeStyles(theme => ({
   root: {
-    background: theme.palette.error.main
+    background: theme.palette.error.main,
+    justifyContent: 'center'
   }
 }));
 

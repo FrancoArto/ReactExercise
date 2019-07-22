@@ -3,8 +3,8 @@ import { compose } from 'redux';
 import { connect } from 'react-redux';
 import { getPlayers, setSearchTerms, filterPlayersSelector } from '../app-modules/players';
 import { SearchForm, PlayersTable } from '../app-modules/players/components';
-import { Grid, Snackbar, Typography, Card, Box, CircularProgress } from '@material-ui/core';
-import { withStyles, ThemeProvider } from '@material-ui/styles';
+import { Grid, Box, CircularProgress } from '@material-ui/core';
+import { withStyles } from '@material-ui/styles';
 import positions from '../app-modules/players/mocks/positions.json';
 import { ErrorBar } from '../app-modules/core/components';
 
@@ -53,7 +53,7 @@ export class SearchPlayers extends React.Component {
     return (
       <Grid className={classes.root} container direction="column">
         {!this.props.error && !this.props.loading &&
-          <Box>
+          <Box className="main-content">
             <Grid className="form row" item>
               <SearchForm
                 onPlayerAgeChange={this.onPlayerAgeChange}
@@ -78,10 +78,7 @@ export class SearchPlayers extends React.Component {
                   vertical: 'bottom',
                   horizontal: 'center',
                 }}
-                ContentProps={{
-                  'aria-describedby': 'error-message',
-                }}
-                message={<span id="error-message">No results to show</span>}
+                message="No results to show"
                 open={true}
               />
             }
@@ -93,10 +90,7 @@ export class SearchPlayers extends React.Component {
               vertical: 'top',
               horizontal: 'center',
             }}
-            ContentProps={{
-              'aria-describedby': 'error-message',
-            }}
-            message={<span id="error-message">An error ocurred: {this.props.error.toString()}. Please reload the page</span>}
+            message={`An error ocurred: ${this.props.error.toString()}. Please reload the page`}
             open={true}
           />
         }
@@ -130,22 +124,29 @@ const styles = {
     margin: 32,
     width: 'auto',
 
-    '& .row': {
-      background: '#FFFFFF',
-      borderRadius: 5,
-      padding: 12,
+    '& .main-content': {
+      width: '-webkit-fill-available',
 
-      '&.loading': {
-        alignSelf: 'center',
-        justifySelf: 'center',
-        width: 'auto'
+      '& .row': {
+        background: '#FFFFFF',
+        borderRadius: 5,
+        padding: 12,
+  
+        '&.loading': {
+          alignSelf: 'center',
+          justifySelf: 'center',
+          width: 'auto'
+        },
+  
+        '&.table-container': {
+          marginTop: 32,
+          overflowX: 'auto',
+          padding: 0
+        }
       },
-
-      '&.table-container': {
-        marginTop: 32,
-        padding: 0
-      }
     },
+
+    
 
     '@media screen and (max-width: 599px)': {
       margin: 0
