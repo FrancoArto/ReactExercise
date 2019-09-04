@@ -1,5 +1,4 @@
 import { RETRIEVE_PLAYERS, RETRIEVE_PLAYERS_SUCCESS, RETRIEVE_PLAYERS_FAILURE, SET_SEARCHTERMS } from ".";
-import moment from "moment";
 
 const initialState = {
   error: null,
@@ -25,7 +24,7 @@ const playersReducer = (state = initialState, action) => {
       return {
         ...state,
         loading: false,
-        players: action.payload.map(player => ({...player, age: moment().diff(player.dateOfBirth, 'years')}))
+        players: action.payload
       };
     }
 

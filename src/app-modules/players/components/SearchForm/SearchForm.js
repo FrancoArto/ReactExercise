@@ -1,45 +1,39 @@
 import React from 'react';
 import { Input, CustomButton, CustomSelect } from '../../../core/components';
 import { Grid, makeStyles } from '@material-ui/core';
+import { Field, reduxForm } from 'redux-form';
 
-const SearchForm = (props) => {
+let SearchForm = (props) => {
 
-  const onPlayerAgeChange = (age) => {
-    props.onPlayerAgeChange(age);
-  }
-
-  const onPlayerNameChange = (name) => {
-    const regex = new RegExp(/^[a-zA-Z]+(\s{0,1}[a-zA-Z- ])*$/);
-    if(regex.test(name) || name === '') {
-      props.onPlayerNameChange(name);
-    }
-  }
-
-  const onPlayerPositionChange = (position) => {
-    props.onPlayerPositionChange(position);
-  }
+  const { positions } = props
 
   const classes = styles();
 
   return (
-    <form onSubmit={props.onSubmit}>
+    <form onSubmit={props.handleSubmit}>
       <Grid container className={classes.container} justify="center" spacing={2}>
         <Grid item xs={12} sm={3}>
-          <Input fullWidth type="text" label="Player name" onChange={onPlayerNameChange} value={props.playerName} variant="outlined" />
+          <Field name="playerName" component={props => 
+            <Input fullWidth type="text" label="Player name" onChange={props.input.onChange} value={props.input.value} variant="outlined" />}
+          />
         </Grid>
         <Grid item xs={12} sm={3}>
-          <CustomSelect
-            fullWidth
-            id="positions-select"
-            label="Position"
-            labelWidth={60}
-            options={props.positions}
-            onValueChange={onPlayerPositionChange}
-            selectedValue={props.playerPosition}
-            variant="outlined" />
+          <Field name="playerPosition" component={props =>
+            <CustomSelect
+              fullWidth
+              id="positions-select"
+              label="Position"
+              labelWidth={60}
+              options={positions}
+              onValueChange={props.input.onChange}
+              selectedValue={props.input.value}
+              variant="outlined" />
+          } />
         </Grid>
         <Grid item xs={12} sm={3}>
-          <Input fullWidth type="number" InputProps={{inputProps: { max: 40, min: 18}}}  label="Age" onChange={onPlayerAgeChange} value={props.playerAge} variant="outlined" />
+          <Field name="playerAge" component={props =>
+            <Input fullWidth type="number" InputProps={{ inputProps: { max: 40, min: 18 } }} label="Age" onChange={props.input.onChange} value={props.input.value} variant="outlined" />
+          } />
         </Grid>
         <Grid item xs={12} sm={2}>
           <CustomButton fullWidth color="primary" type="submit" text="Search" variant="contained" />
@@ -60,5 +54,14 @@ const styles = makeStyles(theme => ({
     }
   }
 }))
+
+SearchForm = reduxForm({
+  form: 'playersForm',
+  initialValues: {
+    playerAge: '',
+    playerName: '',
+    playerPosition: ''
+  }
+})(SearchForm)
 
 export default SearchForm;

@@ -10,40 +10,16 @@ import { ErrorBar } from '../app-modules/core/components';
 
 export class SearchPlayers extends React.Component {
 
-  state = {
-    playerAge: '',
-    playerName: '',
-    playerPosition: ''
-  }
-
   componentDidMount() {
     this.props.getPlayers();
   }
 
-  onFormSubmit = (event) => {
-    event.preventDefault();
+  onFormSubmit = values => {
+    console.log(values);
     this.props.setSearchTerms({
-      playerAge: +this.state.playerAge,
-      playerName: this.state.playerName.trimRight(),
-      playerPosition: this.state.playerPosition
-    })
-  }
-
-  onPlayerAgeChange = (age) => {
-    this.setState({
-      playerAge: age
-    })
-  }
-
-  onPlayerNameChange = (name) => {
-    this.setState({
-      playerName: name
-    })
-  }
-
-  onPlayerPositionChange = (position) => {
-    this.setState({
-      playerPosition: position
+      playerAge: +values.playerAge,
+      playerName: values.playerName.trimRight(),
+      playerPosition: values.playerPosition
     })
   }
 
@@ -60,9 +36,6 @@ export class SearchPlayers extends React.Component {
                 onPlayerNameChange={this.onPlayerNameChange}
                 onPlayerPositionChange={this.onPlayerPositionChange}
                 onSubmit={this.onFormSubmit}
-                playerAge={this.state.playerAge}
-                playerName={this.state.playerName}
-                playerPosition={this.state.playerPosition}
                 positions={positions} />
             </Grid>
             {this.props.results.length > 0 &&
