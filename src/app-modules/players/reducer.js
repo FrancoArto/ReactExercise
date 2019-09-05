@@ -5,7 +5,7 @@ const initialState = {
   loading: false,
   players: [],
   searchTerms: {
-    playerAge: 0,
+    playerAge: '',
     playerName: '',
     playerPosition: ''
   }

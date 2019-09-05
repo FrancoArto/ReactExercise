@@ -15,11 +15,10 @@ export class SearchPlayers extends React.Component {
   }
 
   onFormSubmit = values => {
-    console.log(values);
     this.props.setSearchTerms({
       playerAge: +values.playerAge,
-      playerName: values.playerName.trimRight(),
-      playerPosition: values.playerPosition
+      playerName: values.playerName.trimRight().toLowerCase(),
+      playerPosition: values.playerPosition.toLowerCase()
     })
   }
 

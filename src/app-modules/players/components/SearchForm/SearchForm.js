@@ -13,8 +13,9 @@ let SearchForm = (props) => {
     <form onSubmit={props.handleSubmit}>
       <Grid container className={classes.container} justify="center" spacing={2}>
         <Grid item xs={12} sm={3}>
-          <Field name="playerName" component={props => 
-            <Input fullWidth type="text" label="Player name" onChange={props.input.onChange} value={props.input.value} variant="outlined" />}
+          <Field name="playerName" component={props =>
+            <Input fullWidth type="text" label="Player name" onChange={props.input.onChange} value={props.input.value} variant="outlined" />
+          }
           />
         </Grid>
         <Grid item xs={12} sm={3}>
