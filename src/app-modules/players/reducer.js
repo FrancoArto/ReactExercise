@@ -1,4 +1,9 @@
-import { RETRIEVE_PLAYERS, RETRIEVE_PLAYERS_SUCCESS, RETRIEVE_PLAYERS_FAILURE, SET_SEARCHTERMS } from ".";
+import {
+  RETRIEVE_PLAYERS,
+  RETRIEVE_PLAYERS_SUCCESS,
+  RETRIEVE_PLAYERS_FAILURE,
+  SET_SEARCHTERMS
+} from ".";
 
 const initialState = {
   error: null,
@@ -6,8 +11,8 @@ const initialState = {
   players: [],
   searchTerms: {
     playerAge: 0,
-    playerName: '',
-    playerPosition: ''
+    playerName: "",
+    playerPosition: ""
   }
 };
 
@@ -31,7 +36,7 @@ const playersReducer = (state = initialState, action) => {
     case RETRIEVE_PLAYERS_FAILURE: {
       return {
         ...state,
-        error: action.payload || 'Unknown error',
+        error: action.payload || "Unknown error",
         loading: false,
         players: []
       };
@@ -41,13 +46,13 @@ const playersReducer = (state = initialState, action) => {
       return {
         ...state,
         searchTerms: action.payload
-      }
+      };
     }
 
     default: {
       return state;
     }
   }
-}
+};
 
 export default playersReducer;

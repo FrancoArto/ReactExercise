@@ -1,25 +1,25 @@
-import React from 'react';
-import Enzyme, { mount, shallow } from 'enzyme';
-import Adapter from 'enzyme-adapter-react-16';
-import { SearchForm } from '..';
-import positions from '../../mocks/positions.json';
+import React from "react";
+import Enzyme, { mount, shallow } from "enzyme";
+import Adapter from "enzyme-adapter-react-16";
+import { SearchForm } from "..";
+import positions from "../../mocks/positions.json";
 
 Enzyme.configure({ adapter: new Adapter() });
 
-describe('search form', () => {
+describe("search form", () => {
   const onFormSubmit = jest.fn();
   const onPlayerAgeChange = jest.fn();
   const onPlayerNameChange = jest.fn();
   const onPlayerPositionChange = jest.fn();
-  let playerAge = '';
-  let playerName = '';
-  let playerPosition = '';
+  let playerAge = "";
+  let playerName = "";
+  let playerPosition = "";
 
-  it('renders without crashing', () => {
+  it("renders without crashing", () => {
     const rendered = shallow(<SearchForm />);
   });
 
-  it('changes player age', () => {
+  it("changes player age", () => {
     const wrapper = mount(
       <SearchForm
         onPlayerAgeChange={onPlayerAgeChange}
@@ -29,20 +29,21 @@ describe('search form', () => {
         playerAge={playerAge}
         playerName={playerName}
         playerPosition={playerPosition}
-        positions={positions} />
+        positions={positions}
+      />
     );
 
-    playerAge = '24';
-    const ageInput = wrapper.find('Input').last();
-    ageInput.prop('onChange')(playerAge);
+    playerAge = "24";
+    const ageInput = wrapper.find("Input").last();
+    ageInput.prop("onChange")(playerAge);
     wrapper.setProps({
       playerAge: playerAge
-    })
+    });
     expect(onPlayerAgeChange).toHaveBeenCalledTimes(1);
     expect(wrapper.props().playerAge).toEqual(playerAge);
   });
 
-  it('changes player name', () => {
+  it("changes player name", () => {
     const wrapper = mount(
       <SearchForm
         onPlayerAgeChange={onPlayerAgeChange}
@@ -52,20 +53,21 @@ describe('search form', () => {
         playerAge={playerAge}
         playerName={playerName}
         playerPosition={playerPosition}
-        positions={positions} />
+        positions={positions}
+      />
     );
 
-    playerName = 'Romelu Lukaku';
-    const nameInput = wrapper.find('Input').first();
-    nameInput.prop('onChange')(playerName);
+    playerName = "Romelu Lukaku";
+    const nameInput = wrapper.find("Input").first();
+    nameInput.prop("onChange")(playerName);
     wrapper.setProps({
       playerName: playerName
-    })
+    });
     expect(onPlayerNameChange).toHaveBeenCalledTimes(1);
     expect(wrapper.props().playerName).toEqual(playerName);
   });
 
-  it('changes player position', () => {
+  it("changes player position", () => {
     const wrapper = mount(
       <SearchForm
         onPlayerAgeChange={onPlayerAgeChange}
@@ -75,20 +77,21 @@ describe('search form', () => {
         playerAge={playerAge}
         playerName={playerName}
         playerPosition={playerPosition}
-        positions={positions} />
+        positions={positions}
+      />
     );
 
-    playerPosition = 'Centre-Forward';
-    const selectInput = wrapper.find('CustomSelect');
-    selectInput.prop('onValueChange')(playerPosition)
+    playerPosition = "Centre-Forward";
+    const selectInput = wrapper.find("CustomSelect");
+    selectInput.prop("onValueChange")(playerPosition);
     wrapper.setProps({
       playerPosition: playerPosition
-    })
+    });
     expect(onPlayerPositionChange).toHaveBeenCalledTimes(1);
     expect(wrapper.props().playerPosition).toEqual(playerPosition);
   });
 
-  it('submits form', () => {
+  it("submits form", () => {
     const wrapper = mount(
       <SearchForm
         onPlayerAgeChange={onPlayerAgeChange}
@@ -98,12 +101,12 @@ describe('search form', () => {
         playerAge={playerAge}
         playerName={playerName}
         playerPosition={playerPosition}
-        positions={positions} />
+        positions={positions}
+      />
     );
 
-    wrapper.prop('onSubmit')();
-    
+    wrapper.prop("onSubmit")();
+
     expect(onFormSubmit).toHaveBeenCalledTimes(1);
   });
-
 });

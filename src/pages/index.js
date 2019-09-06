@@ -1,1 +1,1 @@
-export { default as SearchPlayers } from './SearchPlayers';
+export { default as SearchPlayers } from "./SearchPlayers";
