@@ -1,37 +1,20 @@
 import { createSelector } from "reselect";
+import { allPass, filter, isEmpty, lt, propEq, propSatisfies } from 'ramda';
 
 const playersSelector = state => state.playersReducer.players;
 const searchTermsSelector = state => state.playersReducer.searchTerms;
 
-const filterByAgeSelector = createSelector([playersSelector, searchTermsSelector], (players, searchTerms) => {
-  let result = players;
-  if (searchTerms.playerAge >= 18) {
-    result = players.filter(player => player.age === searchTerms.playerAge);
-  }
-  return result;
-});
+const filterPlayersSelector = createSelector([playersSelector, searchTermsSelector],
+   (players, searchTerms) => {
 
-const filterByNameSelector = createSelector([playersSelector, searchTermsSelector], (players, searchTerms) => {
-  let result = players;
-  if (searchTerms.playerName !== '') {
-    result = players.filter(player => player.name.toLowerCase().includes(searchTerms.playerName.toLowerCase()));
-  }
-  return result;
-});
+  const matchesPlayerAge = player => lt(searchTerms.playerAge, 18) ? true : propEq('age', searchTerms.playerAge, player);
+  const matchesPlayerName = player => isEmpty(searchTerms.playerName) ? true : propSatisfies(prop => prop.toLowerCase().includes(searchTerms.playerName), 'name', player);
+  const matchesPlayerPosition = player => isEmpty(searchTerms.playerPosition) ? true : propEq('position', searchTerms.playerPosition, player);
 
-const filterByPositionSelector = createSelector([playersSelector, searchTermsSelector], (players, searchTerms) => {
-  let result = players;
-  if (searchTerms.playerPosition !== '') {
-    result = players.filter(player => player.position === searchTerms.playerPosition);
-  }
-  return result;
-});
-
-const filterPlayersSelector = createSelector([playersSelector, filterByAgeSelector, filterByNameSelector, filterByPositionSelector],
-   (players, filterByAgeResult, filterByNameResult, filterByPositionResult) => {
-  const result = players.filter(player => (filterByAgeResult.indexOf(player) >= 0 && filterByNameResult.indexOf(player) >= 0 && filterByPositionResult.indexOf(player) >= 0))
+  const predicates = allPass([matchesPlayerAge, matchesPlayerName, matchesPlayerPosition]);
+  const result = filter(predicates, players)
 
   return result;
 });
 
-export default { playersSelector, searchTermsSelector, filterByAgeSelector, filterByNameSelector, filterByPositionSelector, filterPlayersSelector };
+export default { playersSelector, searchTermsSelector, filterPlayersSelector };

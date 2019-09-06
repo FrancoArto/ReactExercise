@@ -18,7 +18,7 @@ export class SearchPlayers extends React.Component {
     this.props.setSearchTerms({
       playerAge: +values.playerAge,
       playerName: values.playerName.trimRight().toLowerCase(),
-      playerPosition: values.playerPosition.toLowerCase()
+      playerPosition: values.playerPosition
     })
   }
 
