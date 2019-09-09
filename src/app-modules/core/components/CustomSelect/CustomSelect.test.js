@@ -15,7 +15,8 @@ describe("custom select", () => {
   };
 
   it("renders without crashing", () => {
-    const rendered = shallow(<CustomSelect options={positions} />);
+    const wrapper = shallow(<CustomSelect options={positions} />);
+    expect(wrapper.find('CustomSelect')).toBeTruthy();
   });
 
   it("handles value change", () => {

@@ -6,5 +6,6 @@ import CustomButton from "./CustomButton";
 Enzyme.configure({ adapter: new Adapter() });
 
 it("renders without crashing", () => {
-  const rendered = shallow(<CustomButton />);
+  const wrapper = shallow(<CustomButton />);
+  expect(wrapper.find('Button')).toBeTruthy();
 });

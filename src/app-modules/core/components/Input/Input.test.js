@@ -14,7 +14,8 @@ describe("input component", () => {
   };
 
   it("renders without crashing", () => {
-    const rendered = shallow(<Input />);
+    const wrapper = shallow(<Input />);
+    expect(wrapper.find('TextField')).toBeTruthy();
   });
 
   it("handles value change", () => {

@@ -6,5 +6,7 @@ import { ErrorBar } from "..";
 Enzyme.configure({ adapter: new Adapter() });
 
 it("renders without crashing", () => {
-  const rendered = shallow(<ErrorBar />);
+  const wrapper = shallow(<ErrorBar />);
+  expect(wrapper.find('SnackBar')).toBeTruthy();
+
 });

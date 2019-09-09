@@ -7,5 +7,6 @@ import Players from "../../mocks/players.json";
 Enzyme.configure({ adapter: new Adapter() });
 
 it("renders without crashing", () => {
-  const rendered = shallow(<Player player={Players[0]} />);
+  const wrapper = shallow(<Player player={Players[0]} />);
+  expect(wrapper.find('Player')).toBeTruthy();
 });
